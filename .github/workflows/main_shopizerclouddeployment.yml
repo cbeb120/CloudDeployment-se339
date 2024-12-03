@@ -6,6 +6,10 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  AZURE_SUBSCRIPTION_ID: '[REDACTED]'  # Set this to your Azure Subscription ID
+  AZURE_RESOURCE_GROUP: GitHubActionExercise-rg   # Set this to your target resource group
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -40,30 +44,16 @@ jobs:
     needs: build-and-test
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Check out code
         uses: actions/checkout@v4
 
-     name: Deploy ARM Template
-on:
-  push:
-    branches:
-      - main
-env:
-  AZURE_SUBSCRIPTION_ID: '[REDACTED]'  # set this to your Azure Subscription Id
-  AZURE_RESOURCE_GROUP: GitHubActionExercise-rg   # set this to your target resource group
-jobs:
-  deploy-virtual-network-template:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@main
       - name: Login to Azure
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Deploy ARM Template
         uses: azure/arm-deploy@v1
         with:
@@ -71,6 +61,11 @@ jobs:
           subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP }}
           template: ./azuredeploy.json
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
           app-name: 'ShopizerCloudDeployment'
           slot-name: 'Production'
-          package: 'shopizer/target/*.jar'
+          package: shopizer/target/*.jar
