@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_SUBSCRIPTION_ID: '[REDACTED]'  # Set this to your Azure Subscription ID
-  AZURE_RESOURCE_GROUP: GitHubActionExercise-rg   # Set this to your target resource group
+  AZURE_SUBSCRIPTION_ID: '1c1df657-2831-4469-b483-3c252ddb2254' 
+  AZURE_RESOURCE_GROUP: 'shopizer-CloudDeployment'
 
 jobs:
   build-and-test:
@@ -58,8 +58,8 @@ jobs:
         uses: azure/arm-deploy@v1
         with:
           scope: resourcegroup
-          subscriptionId: ${{ env.1c1df657-2831-4469-b483-3c252ddb2254 }}
-          resourceGroupName: ${{ env.shopizer-CloudDeployment }}
+          subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP }}
           template: ./azuredeploy.json
 
       - name: Deploy to Azure Web App
