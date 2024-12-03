@@ -4,10 +4,8 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
-
 env:
-  AZURE_SUBSCRIPTION_ID: '1c1df657-2831-4469-b483-3c252ddb2254' 
+  AZURE_SUBSCRIPTION_ID: '/subscriptions/1c1df657-2831-4469-b483-3c252ddb2254/resourceGroups/shopizer-CloudDeployment/providers/Microsoft.Web/sites/ShopizerCloudDeployment4' 
   AZURE_RESOURCE_GROUP: 'shopizer-CloudDeployment'
 
 jobs:
