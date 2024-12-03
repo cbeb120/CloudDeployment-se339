@@ -30,8 +30,8 @@ jobs:
 
       - name: Build and run tests with Maven
         run: |
-              cd shopizer
-              mvn clean install
+          cd shopizer
+          mvn clean install
         env:
           MAVEN_OPTS: "-Xmx1024m"
 
@@ -43,6 +43,13 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -50,4 +57,4 @@ jobs:
         with:
           app-name: 'ShopizerCloudDeployment'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          package: 'shopizer/target/*.jar'
