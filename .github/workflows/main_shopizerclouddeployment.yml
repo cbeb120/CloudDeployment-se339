@@ -27,6 +27,10 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+
+        - name: Make Maven Wrapper executable
+        run: chmod +x mvnw
+
       - name: Build and run tests with Maven
         run: mvnw clean install
         env:
