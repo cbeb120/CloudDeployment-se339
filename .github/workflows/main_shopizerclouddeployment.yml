@@ -16,19 +16,19 @@ jobs:
     steps:
 
       - name: Run Maven
-        path: '/shopizer'
+        path: '\shopizer'
         run: mvnw clean install
         run: mvnw spring-boot:run
 
       - name: Build with Docker
-        path: '/shopizer-docker-compose'
+        path: '\shopizer-docker-compose'
         run: docker compose up -d  
 
 tests:
   build:
     steps:
       - name: DataUtils Test
-        path: '/shopizer/sm-core/src/test/java/com/salesmanager/test/business/utils'
+        path: '\shopizer\sm-core\src\test\java\com\salesmanager\test\business\utils'
         run: ./DataUtilsTest.java
 
   deploy:
