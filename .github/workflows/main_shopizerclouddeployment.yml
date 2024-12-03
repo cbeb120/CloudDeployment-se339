@@ -53,6 +53,21 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           auth-type: 'IDENTITY'
 
+      - name: Azure CLI script
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az account show
+
+      - name: Azure PowerShell script
+        uses: azure/powershell@v2
+        with:
+          azPSVersion: "latest"
+          inlineScript: |
+            Get-AzContext
+            Get-AzResourceGroup
+
       - name: Deploy ARM Template
         uses: azure/arm-deploy@v1
         with:
