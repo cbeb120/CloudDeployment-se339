@@ -5,7 +5,6 @@ on:
     branches:
       - main
 env:
-  AZURE_SUBSCRIPTION_ID: '/subscriptions/1c1df657-2831-4469-b483-3c252ddb2254/resourceGroups/shopizer-CloudDeployment/providers/Microsoft.Web/sites/ShopizerCloudDeployment4' 
   AZURE_RESOURCE_GROUP: 'shopizer-CloudDeployment'
 
 jobs:
@@ -50,13 +49,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
 
       - name: Deploy ARM Template
         uses: azure/arm-deploy@v1
         with:
           scope: resourcegroup
-          subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP }}
           template: ./azuredeploy.json
 
