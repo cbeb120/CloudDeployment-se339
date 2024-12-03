@@ -58,8 +58,8 @@ jobs:
         uses: azure/arm-deploy@v1
         with:
           scope: resourcegroup
-          subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
-          resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP }}
+          subscriptionId: ${{ env.1c1df657-2831-4469-b483-3c252ddb2254 }}
+          resourceGroupName: ${{ env.shopizer-CloudDeployment }}
           template: ./azuredeploy.json
 
       - name: Deploy to Azure Web App
