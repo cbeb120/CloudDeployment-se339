@@ -46,17 +46,12 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID_42EA9AA76F01476A9EEDF69763F8D9BC }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID_21352D6330494502A4DB6B5B667DC86C }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTIONID_E97C5C869ED34140B10790AEB220C11F }}
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'ShopizerCloudDeployment'
           slot-name: 'Production'
-          package: shopizer/target/*.jar
+          package: '*.jar'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CF82E2E9C8534DA1A17A979DDE35967A }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
