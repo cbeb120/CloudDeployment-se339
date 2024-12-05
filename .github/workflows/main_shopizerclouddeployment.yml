@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'ShopizerCloudDeployment'
           slot-name: 'Production'
-          package: 'shopizer\.mvn\*.jar'
+          package: 'shopizer\.mvn\maven-wrapper.jar'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CF82E2E9C8534DA1A17A979DDE35967A }}
