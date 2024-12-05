@@ -47,7 +47,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy to Azure Web App
-        id: deploy-to-web app
+        id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'ShopizerCloudDeployment'
