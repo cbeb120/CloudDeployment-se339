@@ -36,6 +36,9 @@ jobs:
         env:
           MAVEN_OPTS: "-Xmx1024m"
 
+      - name: List target directory
+        run: ls -l shopizer/sm-shop/target
+
   deploy:
     runs-on: ubuntu-latest
     needs: build-and-test
