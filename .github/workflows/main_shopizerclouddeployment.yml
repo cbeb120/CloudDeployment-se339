@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'ShopizerCloudDeployment'
           slot-name: 'Production'
-          package: 'shopizer\sm-core\target\sm-core-3.2.5.jar'
+          package: 'shopizer\sm-core\target\sm-core-3.2.5-sources.jar'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CF82E2E9C8534DA1A17A979DDE35967A }}
